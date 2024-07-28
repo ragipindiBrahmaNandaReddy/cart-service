@@ -1,9 +1,6 @@
 package com.brahma.cart.bean;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,14 +13,17 @@ import lombok.NoArgsConstructor;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
     private String productName;
     private String productDescription;
     private long productQuantity;
+
     @ManyToOne
-    @JoinColumn(name = "customer", referencedColumnName = "id")
+    @JoinColumn(name = "cart_id", referencedColumnName = "cartId")
     private Cart cart;
+
     @ManyToOne
-    @JoinColumn(name = "customer", referencedColumnName = "id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 }
